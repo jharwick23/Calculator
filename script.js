@@ -19,15 +19,16 @@ function handleButtonClick(value){
         operator = '';
         answer = '';
     }
-    if(!isNaN(value) || value === '.'){ // Check if it is a number or decimal
-        if(operator){ // If there is an operator add to second number
-            if(!(secondNum.includes('.') && value === '.')){
-                secondNum += value; 
+    const maxDigits = 10;
+
+    if (!isNaN(value) || value === '.') { // Check if it is a number or decimal
+        if (operator) { // If there is an operator, add to second number
+            if (secondNum.length < maxDigits && !(secondNum.includes('.') && value === '.')) {
+                secondNum += value;
             }
-        }
-        else{
-            if(!(firstNum.includes('.') && value === '.')){
-                firstNum += value; 
+        } else {
+            if (firstNum.length < maxDigits && !(firstNum.includes('.') && value === '.')) {
+                firstNum += value;
             }
         }
     }
@@ -59,6 +60,11 @@ function handleButtonClick(value){
     else if (value === '='){
         if (firstNum && operator && secondNum){ // If = is entered calculate result
             answer = operate(operator, parseFloat(firstNum), parseFloat(secondNum));
+            if (answer.toString().length > maxDigits) {
+                answer = parseFloat(answer).toExponential(5); // Adjust the exponent precision as needed
+            } else {
+                answer = answer.toString();
+            }
             firstNum = answer.toString();
             secondNum = '';
             operator = '';
@@ -67,6 +73,11 @@ function handleButtonClick(value){
     else { // New operator entered
         if(firstNum && secondNum && operator) {
             answer = operate(operator, parseFloat(firstNum), parseFloat(secondNum));
+            if (answer.toString().length > maxDigits) {
+                answer = parseFloat(answer).toExponential(5); // Adjust the exponent precision as needed
+            } else {
+                answer = answer.toString();
+            }
             firstNum = answer.toString();
             secondNum = '';
         }
