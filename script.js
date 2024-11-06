@@ -31,7 +31,7 @@ function handleButtonClick(value){
             }
         }
     }
-    else if(value === '±'){
+    else if(value === '±'){ // Makes number negative or positive
         if (firstNum && secondNum === '' && operator === ''){
             firstNum = (-Number(firstNum)).toString();
         }
@@ -39,7 +39,7 @@ function handleButtonClick(value){
             secondNum = (-Number(secondNum)).toString();
         }
     }
-    else if(value === 'Clear'){
+    else if(value === 'Clear'){ // Clears calculator
         firstNum = '';
         secondNum = '';
         operator = '';
@@ -47,7 +47,7 @@ function handleButtonClick(value){
     }
     else if(value === 'Backspace'){
         if (secondNum){
-            secondNum = secondNum.slice(0, -1);
+            secondNum = secondNum.slice(0, -1); // Delete last number entered
         } 
         else if (operator){
             operator = '';
@@ -57,17 +57,20 @@ function handleButtonClick(value){
         }
     }
     else if (value === '='){
-        if (firstNum && operator && secondNum){
+        if (firstNum && operator && secondNum){ // If = is entered calculate result
             answer = operate(operator, parseFloat(firstNum), parseFloat(secondNum));
             firstNum = answer.toString();
             secondNum = '';
             operator = '';
         }
     }
-    else {
-        if(firstNum && !secondNum) {
-            operator = value;
+    else { // New operator entered
+        if(firstNum && secondNum && operator) {
+            answer = operate(operator, parseFloat(firstNum), parseFloat(secondNum));
+            firstNum = answer.toString();
+            secondNum = '';
         }
+        operator = value; 
     }
     updateDisplay();
 }
