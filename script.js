@@ -80,6 +80,40 @@ document.querySelectorAll("button").forEach(button => {
     button.addEventListener("click", () => handleButtonClick(button.innerText));
 });
 
+// Attach a single keyboard event listener for key presses on the entire document
+document.addEventListener("keydown", (event) => {
+    let key = event.key;
+
+    // Map the key to calculator input
+    if (/[0-9]/.test(key)) {
+        handleButtonClick(key); // For numbers
+    } 
+    else if (key === "+") {
+        handleButtonClick("+");
+    } 
+    else if (key === "-") {
+        handleButtonClick("-");
+    } 
+    else if (key === "*") {
+        handleButtonClick("x");
+    } 
+    else if (key === "/") {
+        handleButtonClick("÷");
+    } 
+    else if (key === "Enter" || key === "=") {
+        handleButtonClick("="); // For equals
+    } 
+    else if (key === "Backspace") {
+        handleButtonClick("Backspace"); 
+    } 
+    else if (key === ".") {
+        handleButtonClick(".");
+    } 
+    else if (key === "c") {
+        handleButtonClick("Clear"); 
+    }
+});
+
 // Basic math functions
 function add(a, b) {return a + b;}
 function subtract(a, b) {return a - b;}
@@ -90,10 +124,22 @@ function remainder(a, b) {return a % b;}
 // Operate function to find which math function to use
 function operate(operator, a, b) {
     switch(operator) {
-        case '+': return add(a,b);
-        case '-': return subtract(a,b);
-        case 'x': return multiply(a,b);
-        case '÷': return b === 0 ? "Error" : division(a,b);
-        case '%': return b === 0 ? "Error" : remainder(a,b);
+        case '+': 
+            result = add(a,b);
+            break;
+        case '-': 
+            result = subtract(a,b);
+            break;
+        case 'x': 
+            result = multiply(a,b);
+            break;
+        case '÷': 
+            result = b === 0 ? "Error" : division(a,b);
+            break;
+        case '%': 
+            result = b === 0 ? "Error" : remainder(a,b);
+            break;
     }
+    result = Math.round(result * 100000000) / 100000000;
+    return result;
 }
