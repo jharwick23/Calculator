@@ -1,0 +1,58 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container{
+    display: flex;
+}
+
+.calculator-container{
+    display: flex;
+    border: 10px solid blue;
+    flex-direction: column;
+    height: 600px;
+    width: 450px;
+}
+
+#display{
+    display: flex;
+    border: 5px solid red;
+    width: auto;
+    height: 100px;
+    flex-direction: column;
+}
+
+#equations{
+    flex: 1;
+    text-align: right;
+}
+
+#answer{
+    flex: 1;
+    text-align: right;
+}
+
+#buttons{
+    display: flex;
+    flex-direction: column-reverse;
+    flex: 1;
+    justify-content: space-evenly;
+    border: 5px solid black;
+}
+
+.digits-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex: 1;
+}
+
+button{
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    margin: 3%;
+}
+
